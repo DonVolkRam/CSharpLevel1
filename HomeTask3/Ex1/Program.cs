@@ -7,66 +7,70 @@ using System.Threading.Tasks;
 
 namespace Ex1
 {
+    class Complex
+    {
+        // Поля приватные.
+        private double im;
+        // По умолчанию элементы приватные, поэтому private можно не писать.
+        double re;
+        // Конструктор без параметров.
+        public Complex()
+        {
+            im = 0;
+            re = 0;
+        }
+        // Конструктор, в котором задаем поля.
+        // Специально создадим параметр re, совпадающий с именем поля в классе.
+        public Complex(double _im, double re)
+        {
+            // Здесь имена не совпадают, и компилятор легко понимает, что чем является.
+            im = _im;
+        // Чтобы показать, что к полю нашего класса присваивается параметр,
+        // используется ключевое слово this
+        // Поле параметр
+this.re = re;
+        }
+        public Complex Plus(Complex x2)
+        {
+            Complex x3 = new Complex();
+            x3.im = x2.im + im;
+            x3.re = x2.re + re;
+            return x3;
+        }
+        // Свойства - это механизм доступа к данным класса.
+        public double Im
+        {
+            get { return im; }
+            set
+            {
+                // Для примера ограничимся только положительными числами.
+                if (value >= 0) im = value;
+            }
+        }
+        // Специальный метод, который возвращает строковое представление данных.
+        public string ToString()
+        {
+            return re + "+" + im + "i";
+        }
+    }
     class Program
     {
-        static void Swap1(ref int Value1, ref int Value2)
-        {
-            //Console.WriteLine($"Value1 = {Value1} Value2 = {Value2}");
-            int t = Value1;
-            Value1 = Value2;
-            Value2 = t;
-            //Console.WriteLine($"Value1 = {Value1} Value2 = {Value2}");
-        }
-
-        static void Init(out double Value1, out double Value2)
-        {
-            Value1 =123212;
-            Value2=1231;
-        }
         static void Main(string[] args)
         {
-            while (true)
-            {
-                Console.Clear();
-                var cirrentTime = DateTime.Now;
-
-                Console.WriteLine(cirrentTime);
-
-                Thread.Sleep(1000);
-
-            }
-
-            //int value;
-            //if (int.TryParse(Console.ReadLine(), out value))
-            //{
-            //    Console.WriteLine("всё ок");
-            //    Console.WriteLine(value);
-            //}
-            //else
-            //{
-            //    Console.WriteLine("всё не ок");
-            //    Console.WriteLine(value);
-
-            //}
-
-            //double a =1 ;
-            //double b =2;
-
-            //Console.WriteLine($"a = {a} b = {b}");
-            //Init(out a, out b);
-            //Console.WriteLine($"a = {a} b = {b}");
-
-
-            //int c = 123, d = 143;
-            //Console.WriteLine($"{c} {d}");
-            //Swap(c, d);
-            //Console.WriteLine($"{c} {d}");
-
-
-            //int y = 111, p = 2222;
-            //Console.WriteLine($"{y} {p}");
-            //Swap(y, p);
-            //Console.WriteLine($"{y} {p}");
+            // Описали ссылку на объект.
+            Complex complex1;
+            // Создали объект и сохранили ссылку на него в complex1.
+            complex1 = new Complex(1, 1);
+            // Описали объект и создали его.
+            Complex complex2 = new Complex(2, 2);
+            // С помощью свойства Im изменили внутреннее (приватное) поле im.
+            complex2.Im = 3;
+            // Создали ссылку на объект.
+            Complex result;
+            // Так как в методе Plus создается новый объект,
+            // в result сохраняем ссылку на вновь созданный объект.
+            result = complex1.Plus(complex2);
+            Console.WriteLine(result.ToString());
         }
     }
 }
