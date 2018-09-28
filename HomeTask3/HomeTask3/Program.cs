@@ -51,7 +51,6 @@ namespace HomeTask3
             Console.WriteLine(result.Print());
         }
 
-
         private static Point Sq(Kof Args)
         {
             double d = Math.Pow(Args.B, 2) - 4 * Args.A * Args.C;

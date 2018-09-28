@@ -25,8 +25,6 @@ namespace Ex1
         }
         static void Main(string[] args)
         {
-
-
             while (true)
             {
                 Console.Clear();
@@ -51,11 +49,6 @@ namespace Ex1
 
             //}
 
-
-
-
-
-
             //double a =1 ;
             //double b =2;
 
@@ -74,7 +67,6 @@ namespace Ex1
             //Console.WriteLine($"{y} {p}");
             //Swap(y, p);
             //Console.WriteLine($"{y} {p}");
-
         }
     }
 }

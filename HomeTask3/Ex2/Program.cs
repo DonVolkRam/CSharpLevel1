@@ -36,11 +36,7 @@ namespace Ex2
         {
             Program p = new Program();
             p.HelloWorld();
-           
-            
-
-
-
+                     
             //NewType a = new NewType();
             //a.HelloWorld1();
 
