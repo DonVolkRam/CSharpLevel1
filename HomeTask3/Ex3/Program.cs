@@ -36,6 +36,25 @@ namespace Ex3
                 return true;
         }
 
+        public static int Nod(int a, int b)
+        {
+            while (a > 0 && b > 0)
+            {
+                if (a > b)
+                    a %= b;
+                else
+                    b %= a;
+            }
+            return a + b;           
+        }
+
+        public Fraction simplify()
+        {
+            this.chislit /= Nod(this.chislit, this.znamenat);
+            this.znamenat /= Nod(this.chislit, this.znamenat);
+            return this;
+        }
+
         static void Main(string[] args)
         {
             int a = 1, 
@@ -48,6 +67,7 @@ namespace Ex3
                 isManySlashes = false;
 
             string[] fractions;
+            string sign;
 
             do
             {
@@ -58,15 +78,15 @@ namespace Ex3
                     if (!isIntZnamenat)
                         Console.WriteLine("Введите целый знаменатель");
                     if (!isNotNull)
-                        Console.WriteLine("Знаменатель должен быть больше нуля");
+//                        throw new ArgumentException("Знаменатель не может быть равен нулю");
+                    Console.WriteLine("Знаменатель не может быть равен нулю");
                     if (!isSlash)
                         Console.WriteLine("Вы забыли про дробную черту");
                     if (isManySlashes)
                         Console.WriteLine("Вы ввели более одной дробной черты");
-
                 }
                 else
-                    Console.WriteLine("Введите дробь вида a/b , где а и b целые числа и b не равно 0");
+                    Console.WriteLine("Введите дробь вида a/b , где а и b целые числа и b не равно нулю");
                 
                 fractions = Console.ReadLine().Split('/');
                 isSlash = fractions.Length > 1 ? true : false;
@@ -84,31 +104,37 @@ namespace Ex3
             Fraction drob1 = new Fraction(a, b);
 
             Console.Write("Дробь выглядит так : ");
-            Console.WriteLine(drob1.ToString());
+            Console.Write(drob1.ToString());
+            Console.Write("Какую операцию вы хотете сделать с ней +, -, *, : ");
+            sign = Console.ReadLine(); 
 
-/*
-                        do
-                        {
-                            Console.WriteLine("Введите числитель");
-                            s = Console.ReadLine();
-                            isInt = int.TryParse(s, out a);
-                        }
+//            Console.Write("После упрощения дробь выглядит так : ");
+//            Console.WriteLine(drob1.simplify().ToString());
 
-                        while (!isInt);
-                        do
-                        {
-                            Console.WriteLine("Введите знаменатель");
-                            s = Console.ReadLine();
-                            isInt = int.TryParse(s, out b);
-                            notNull = ZnamenatNotNull(b);
-                        }
-                        while (!isInt || !notNull);
-            
-                        Fraction drob1 = new Fraction(a, b);
 
-                        Console.Write("Дробь выглядит так : ");
-                        Console.WriteLine(drob1.ToString());
-*/
+            /*
+                                    do
+                                    {
+                                        Console.WriteLine("Введите числитель");
+                                        s = Console.ReadLine();
+                                        isInt = int.TryParse(s, out a);
+                                    }
+
+                                    while (!isInt);
+                                    do
+                                    {
+                                        Console.WriteLine("Введите знаменатель");
+                                        s = Console.ReadLine();
+                                        isInt = int.TryParse(s, out b);
+                                        notNull = ZnamenatNotNull(b);
+                                    }
+                                    while (!isInt || !notNull);
+
+                                    Fraction drob1 = new Fraction(a, b);
+
+                                    Console.Write("Дробь выглядит так : ");
+                                    Console.WriteLine(drob1.ToString());
+            */
             Console.ReadLine();
         }
     }
