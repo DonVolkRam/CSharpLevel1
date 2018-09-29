@@ -30,7 +30,7 @@ namespace HomeTask3
     {
         static void Main(string[] args)
         {
-
+            Console.WriteLine("выполнено 2 и 3 задание");
            
         } 
     }
